@@ -1,0 +1,35 @@
+﻿@using ApostasCEF.ViewModels;
+
+@model JogoViewModel
+@{
+    ViewBag.Title = "Novo Jogo";
+
+    string urlNovaAposta = Url.Content("~/Loteria/SalvarAposta");
+    string urlGerarAutomaticamente = Url.Content("~/Loteria/GerarAposta");
+
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <nav class="navbar" role="navigation">
+        <ul class="nav navbar-nav margin-bottom-35">
+            @for (int i=1; i<=Model.QuantidadeNumerosDisponiveis; i++)
+            {
+                <li class="">
+                    <button class="btn btn-default btn-lg" ng-click="SelecionarNumero(@i, @Model.QuantidadeNumerosAposta)" ng-class='NumeroJaExiste(@i) ? "alert-success" : ""' data-numero="@i">
+                        @i
+                    </button>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+<div class="row">
+    <button class="btn btn-default btn-lg btn-success" ng-click='SalvarAposta("@urlNovaAposta", @Model.QuantidadeNumerosAposta)'>
+        Salvar
+    </button>
+    <button class="btn btn-default btn-lg btn-success" ng-click='GerarAposta("@urlGerarAutomaticamente")'>
+        Gerar Aposta Automaticamente
+    </button>
+</div>
